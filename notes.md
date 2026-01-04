@@ -53,3 +53,11 @@ Ready-to-explain auth flow
 ✔ Protected routes secured
 ✔ Role-based access implemented
 ✔ Able to explain full auth flow
+
+# Day 4
+
+✔ Product model created
+✔ CRUD APIs working
+✔ Admin protection enforced
+✔ Public listing works
+✔ You can explain design choices
