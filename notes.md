@@ -46,3 +46,10 @@ JWT generation
 Password hashing
 
 Ready-to-explain auth flow
+
+# Day 3
+
+✔ Auth middleware working
+✔ Protected routes secured
+✔ Role-based access implemented
+✔ Able to explain full auth flow
