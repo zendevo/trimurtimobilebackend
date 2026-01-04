@@ -44,3 +44,9 @@ export const remove = async (req, res, next) => {
     next(error);
   }
 };
+
+export const uploadImage = async (req, res) => {
+  res.status(200).json({
+    imageUrl: `/uploads/${req.file.filename}`,
+  });
+};
