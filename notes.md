@@ -61,3 +61,10 @@ Ready-to-explain auth flow
 ✔ Admin protection enforced
 ✔ Public listing works
 ✔ You can explain design choices
+
+# Day 5
+
+✔ Multer configured
+✔ Image upload API works
+✔ Images accessible via URL
+✔ Product images stored correctly

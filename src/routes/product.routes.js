@@ -2,6 +2,8 @@ import express from "express";
 import * as productController from "../controllers/product.controller.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
 import roleMiddleware from "../middlewares/role.middleware.js";
+import upload from "../utils/upload.js";
+
 const router = express.Router();
 
 //public routes
@@ -26,6 +28,14 @@ router.delete(
   authMiddleware,
   roleMiddleware("admin"),
   productController.remove
+);
+
+router.post(
+  "/upload",
+  authMiddleware,
+  roleMiddleware("admin"),
+  upload.single("image"),
+  productController.uploadImage
 );
 
 export default router;
