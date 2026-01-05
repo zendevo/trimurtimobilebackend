@@ -68,3 +68,12 @@ Ready-to-explain auth flow
 ✔ Image upload API works
 ✔ Images accessible via URL
 ✔ Product images stored correctly
+
+# Day 6
+
+✔ Product List API
+✔ Pagination
+✔ Search
+✔ Sorting
+✔ Category filter
+✔ Query optimization

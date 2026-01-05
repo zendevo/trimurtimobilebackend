@@ -21,6 +21,7 @@ router.put(
   "/update/:id",
   authMiddleware,
   roleMiddleware("admin"),
+  upload.single("image"),
   productController.update
 );
 router.delete(
