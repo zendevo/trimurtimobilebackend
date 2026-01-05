@@ -11,7 +11,7 @@ export const create = async (req, res, next) => {
 
 export const getAll = async (req, res, next) => {
   try {
-    const products = await productService.getAllProducts();
+    const products = await productService.getAllProducts(req, res);
     res.status(200).json(products);
   } catch (error) {
     next(error);
