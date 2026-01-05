@@ -1,5 +1,5 @@
 import Product from "../models/Product.model.js";
-const { deleteFile } = require("../utils/file.js");
+import { deleteFile } from "../utils/file.js";
 
 export const createProduct = async (data) => {
   return await Product.create(data);
@@ -9,42 +9,38 @@ export const createProduct = async (data) => {
 //   return await Product.find({ isActive: true });
 // };
 
-export const getAllProducts = async (req, res, next) => {
-  try {
-    const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
-    const { search, sort = "createdAt", order = "desc", category } = req.query;
-    let query = {};
+export const getAllProducts = async (req, res) => {
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+  const { search, sort = "createdAt", order = "desc", category } = req.query;
+  let query = {};
 
-    if (search) {
-      query.$text = { $search: search };
-    }
-
-    if (category) {
-      query.category = category;
-    }
-
-    const sortOption = {
-      [sort]: order === "asc" ? 1 : -1,
-    };
-
-    const products = await Product.find(query)
-      .sort(sortOption)
-      .skip(skip)
-      .limit(limit);
-
-    const total = await Product.countDocuments(query);
-
-    res.json({
-      products,
-      total,
-      page,
-      totalPages: Math.ceil(total / limit),
-    });
-  } catch (error) {
-    next(error);
+  if (search) {
+    query.$text = { $search: search };
   }
+
+  if (category) {
+    query.category = category;
+  }
+
+  const sortOption = {
+    [sort]: order === "asc" ? 1 : -1,
+  };
+
+  const products = await Product.find(query)
+    .sort(sortOption)
+    .skip(skip)
+    .limit(limit);
+
+  const total = await Product.countDocuments(query);
+
+  return {
+    products,
+    total,
+    page,
+    totalPages: Math.ceil(total / limit),
+  };
 };
 
 export const getProductById = async (id) => {

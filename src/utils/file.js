@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-const deleteFile = (filePath) => {
+export const deleteFile = (filePath) => {
   if (!filePath) return;
 
   const absolutePath = path.join(__dirname, "..", filePath);
@@ -9,5 +9,3 @@ const deleteFile = (filePath) => {
     fs.unlinkSync(absolutePath);
   }
 };
-
-module.exports = { deleteFile };

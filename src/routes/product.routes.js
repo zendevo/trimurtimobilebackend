@@ -7,7 +7,7 @@ import upload from "../utils/upload.js";
 const router = express.Router();
 
 //public routes
-router.get("/list", productController.getAll);
+router.get("/list", authMiddleware, productController.getAll);
 router.get("/:id", productController.getOne);
 
 //Admin only
