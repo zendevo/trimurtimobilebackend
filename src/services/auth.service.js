@@ -28,7 +28,22 @@ export const loginUser = async (email, password) => {
   if (!isMatch) {
     throw new Error("Invalid Username and Password");
   }
-  return generateToken(user);
+  return {
+    token: generateToken(user),
+    refreshToken: generateRefreshToken(user),
+  };
+};
+
+export const refreshToken = async (req, res) => {
+  const token = req.body.refreshToken;
+  if (!token) throw new Error(401);
+  return jwt.verify(token, process.env.REFRESH_SECRET, (err, user) => {
+    if (err) throw new Error(403);
+
+    const newToken = generateToken(user);
+    console.log("newToken", newToken);
+    return newToken;
+  });
 };
 
 const generateToken = (user) => {
@@ -36,7 +51,13 @@ const generateToken = (user) => {
     { id: user._id, role: user.role, name: user.name, email: user.email },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1d",
+      expiresIn: "2m",
     }
   );
+};
+
+const generateRefreshToken = (user) => {
+  return jwt.sign({ id: user._id }, process.env.REFRESH_SECRET, {
+    expiresIn: "1d",
+  });
 };
